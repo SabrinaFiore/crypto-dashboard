@@ -1,8 +1,21 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function CoinDetail() {
 	const {coin} = useParams();
-	console.log(coin);
+	
+	useEffect(() => {
+		fetch('https://api.coingecko.com/api/v3/coins/markets' + 
+			new URLSearchParams({
+				vs_currency: 'eur',
+				ids: 'coin'
+			})
+		)
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+		})
+	})
 
 	return (
 		<>
